@@ -51,11 +51,15 @@ app.post("/upload", upload.single("file"), (req, res) => {
 
 // Serve processed videos
 app.get("/processed/:filename", (req, res) => {
+
   const filePath = path.join(PROCESSED_DIR, req.params.filename);
-  if (!fs.existsSync(filePath)) {
+  console.log(`Serving file: ${filePath}`);
+
+  if (!fs.existsSync(filePath) || fs.statSync(filePath).size === 0) {
+    console.log(`File not found: ${filePath}`);
     return res.status(404).json({ error: "File not found" });
   }
-  res.sendFile(filePath);
+  res.sendFile(filePath,{headers: {'Content-Type': 'video/mp4'}});
 });
 
 // Delete uploaded and processed videos

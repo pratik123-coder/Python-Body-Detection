@@ -23,7 +23,7 @@ def people_counter(input_path, output_path):
     print(f"Video dimensions: {w}x{h}")
 
     # Initialize video writer
-    out = cv.VideoWriter(output_path, cv.VideoWriter_fourcc(*"mp4v"), 30.0, (w, h))
+    out = cv.VideoWriter(output_path, cv.VideoWriter_fourcc(*"avc1"), 30.0, (w, h))
 
     # Line positions
     line_up = int(2 * h / 5)
